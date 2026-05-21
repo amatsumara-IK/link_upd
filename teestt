@@ -1,3 +1,103 @@
-#hide-settings: 1
-vless://a2b85c1c-c066-4ea0-9c83-66cbae79ccc7@103.20.235.14:443?type=tcp&security=reality&flow=xtls-rprx-vision&sni=www.microsoft.com&fp=chrome&pbk=7l8revUIsqFmsrcP2XAo1RNPOryQu_adBWxjMSnPTgg&sid=ae&spx=%2F#ID%20id-aggregator-node-01
-hysteria2://user_10.lu3_cueHCtqx9_iuR7a6FQ@103.20.235.14:1935/?insecure=0&sni=sub1.netrelay-sync.site#ID%20id-aggregator-node-01%20%28%D0%B7%D0%B0%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D0%B9%29
+{
+    "dns": {
+        "queryStrategy": "UseIP",
+        "servers": [
+            "1.1.1.1",
+            "1.0.0.1"
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "127.0.0.1",
+            "port": 10808,
+            "protocol": "socks",
+            "settings": {
+                "auth": "noauth",
+                "udp": true
+            },
+            "sniffing": {
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "enabled": true,
+                "routeOnly": false
+            },
+            "tag": "socks"
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": 10809,
+            "protocol": "http",
+            "settings": {
+                "allowTransparent": false
+            },
+            "sniffing": {
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "enabled": true,
+                "routeOnly": false
+            },
+            "tag": "http"
+        }
+    ],
+    "meta": null,
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "noderu2.motion-vpn.com",
+                        "port": 443,
+                        "users": [
+                            {
+                                "encryption": "none",
+                                "flow": "xtls-rprx-vision",
+                                "id": "7d073c6e-9769-4617-8200-62d4e5513fa7"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "realitySettings": {
+                    "fingerprint": "chrome",
+                    "publicKey": "NhIxhHDxYR9HEhlnDcacIVg8S4Z5lw8aWg6HZIUeBzo",
+                    "serverName": "noderu2.motion-vpn.com"
+                },
+                "security": "reality",
+                "tcpSettings": {
+                }
+            },
+            "tag": "proxy"
+        },
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ],
+    "remarks": "🇷🇺 Россия",
+    "routing": {
+        "domainMatcher": "hybrid",
+        "domainStrategy": "IPIfNonMatch",
+        "rules": [
+            {
+                "outboundTag": "direct",
+                "protocol": [
+                    "bittorrent"
+                ],
+                "type": "field"
+            }
+        ]
+    }
+}
