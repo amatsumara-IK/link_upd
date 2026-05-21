@@ -101,3 +101,6 @@
         ]
     }
 }
+
+
+vless://test@sub.ru.netrelay-sync.online:443?type=tcp&encryption=none&security=reality&pbk=wWxV3KmPjbUh3bFL5ebCrkwCNwYxAWz7pfRpk7wqqGY&fp=chrome&sni=www.ozon.ru&sid=b3&spx=%2F&flow=xtls-rprx-vision#Russia-test
